@@ -58,8 +58,9 @@ LC.f.onload = function() {
   // retrieve html element to build map in - generate some basics
   LC.data.svg = d3.select('#map_display')
     .append('svg')
-      .attr('width', LC.settings.width)
-      .attr('height', LC.settings.height);
+      .attr('viewBox', '0 0 ' + LC.settings.width + ' ' + LC.settings.height);
+      //.attr('width', LC.settings.width)
+      //.attr('height', LC.settings.height);
 
   let g = LC.data.svg.append('g');
   g.append('g')
