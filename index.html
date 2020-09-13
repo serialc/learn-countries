@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- D3 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+
+    <title>Pays et leurs capitals (Europe+)</title>
+
+<style>
+body {
+    background-color: #343a40;
+}
+#content {
+    background-color: #eee;
+    color: #333;
+}
+#game_ui {
+  margin-top: 10px;
+}
+#footer {
+    color: white;
+    margin-top: 2rem;
+}
+#select_next {
+  margin-top: 1em;
+}
+svg {
+  margin: 10px 0px;
+  border: 1px solid #aaa;
+  background-color: #006994;
+}
+svg:hover {
+  cursor: pointer;
+}
+svg #countries path {
+  stroke: white;
+  stroke-width: 0.5px;
+  fill:  #D2B48C;
+}
+svg path.capital {
+  stroke: black;
+  stroke-width: 2px;
+  opacity: 0.7;
+}
+svg path.capital:hover {
+  fill: white;
+  opacity: 1;
+}
+svg #countries .Europe { fill: #c2c48c; }
+svg #countries .Asia   { fill: #e2b48c; }
+svg #countries .Africa { fill: #d2b4ac; }
+svg #countries .South_America { fill: #ffa500; }
+svg #countries .North_America { fill: #666; }
+svg #countries .Antarctica { fill: #eee; }
+svg #countries .Oceania{ fill: #cc6; }
+
+
+#countries path:hover {
+  opacity: 0.8;
+}
+
+
+</style>
+
+  <body>
+    <nav class="navbar navbar-dark bg-dark">
+      <span class="navbar-brand mb-0 h1">Pays et leurs capitales</span>
+      <span class="navbar-brand"></span>
+    </nav>
+
+    <div id='content' class='container-fluid'>
+      <div class='row'>
+        <!-- Content here -->
+        <div id='map_display' class='col-lg'> </div>
+        <div class='col-lg'>
+          <div id='game_ui'>
+            <div id='select_game'>
+              <h4>Choisissez un jeu:</h4>
+              <p><button type="button" style='width:100%' class="btn btn-primary" onclick="LC.f.set_game_type('find_country')">Trouver le pays</button></p>
+              <p><button type="button" style='width:100%' class="btn btn-primary" onclick="LC.f.set_game_type('find_capital')">Trouver la capitale</button></p>
+              <!-- <p><button type="button" style='width:100%' class="btn btn-primary" onclick="LC.f.set_game_type('name_country')">Comment s'appele le pays</button></p>
+                <p><button type="button" style='width:100%' class="btn btn-primary" onclick="LC.f.set_game_type('name_capital')">Comment s'appele la capitale</button></p> --!>
+            </div>
+            <div id='select_set'>
+              <h4>Selectionez les pays/capitales dans le jeux:</h4>
+              <p><button type="button" style='width:100%' class="btn btn-primary" onclick="LC.f.set_game_countries(1)" onmouseenter="LC.f.highlight_set(1)">Groupe 1</button></p>
+              <p><button type="button" style='width:100%' class="btn btn-primary" onclick="LC.f.set_game_countries(2)" onmouseenter="LC.f.highlight_set(2)">Groupe 2</button></p>
+              <p><button type="button" style='width:100%' class="btn btn-primary" onclick="LC.f.set_game_countries(3)" onmouseenter="LC.f.highlight_set(3)">Groupe 3</button></p>
+              <p><button type="button" style='width:100%' class="btn btn-primary" onclick="LC.f.set_game_countries(4)" onmouseenter="LC.f.highlight_set(4)">Groupe 4</button></p>
+              <p><button type="button" style='width:100%' class="btn btn-primary" onclick="LC.f.set_game_countries(5)" onmouseenter="LC.f.highlight_set(5)">Groupe 1-4</button></p>
+            </div>
+            <div id='select_start'>
+              <div id='game_description'></div>
+              <p id='start_button'><button type="button" style='width:100%' class="btn btn-success" onclick="LC.f.start_game()">Commencez!</button></p>
+            </div>
+            <div id='game_instructions'></div>
+            <div id='game_feedback'></div>
+            <div id='select_next'>
+              <p><button type="button" style='width:100%' class="btn btn-primary" onclick="LC.f.game_ask_question()">Next</button></p>
+            </div>
+            <div id='select_play_again'>
+              <p id='game_results'></p>
+              <p><button type="button" style='width:100%' class="btn btn-primary" onclick="LC.f.reset_game()">Jouer une autre partie</button></p>
+            </div>
+            <div class="alert alert-success" role="alert" id='smessaging'> </div>
+            <div class="alert alert-info" role="alert" id='imessaging'> </div>
+            <div class="alert alert-danger" role="alert" id='emessaging'> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id='footer' class="container-fluid bg-dark">
+      <div class='row'>
+        <div class='col-lg'>
+          <p>Created by Cyrille M&eacute;dard de Chardon</p>
+          <p>Code available on <a href='https://github.com/serialc/learn-countries'>Github</a></p>
+        </div>
+        <div class='col-lg'>
+          <h4>Sources</h4>
+          <p><a href="https://gadm.org">Pays - GADM.org</a></p>
+          <p><a href="https://www.data.gouv.fr/fr/datasets/etats-et-capitales-du-monde/">Noms d'&eacute;tats et capitales</a></p>
+          <p><a href="https://www.jasom.net/list-of-capital-cities-with-latitude-and-longitude/">Localization de capitales</a></p>
+        </div>
+        <div class='col-lg'>
+          <h4>Outils</h4>
+          <p><a href="https://getbootstrap.com/">Bootstrap</a></p>
+          <p><a href="https://d3js.org/">D3</a></p>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="lc.js"></script>
+</html>
