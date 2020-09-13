@@ -91,7 +91,7 @@ Grenada,St. George's,12.056098,-61.7488,
 Guadeloupe,Basse-Terre,16.014453,-61.706411,
 Guam,Hagåtña,13.470891,144.751278,
 Guatemala,Guatemala City,14.634915,-90.506882,
-Guernsey,St. Peter Port,49.455443,-2.536871,
+#Guernsey,St. Peter Port,49.455443,-2.536871,
 Guinea,Conakry,9.641185,-13.578401,
 Guinea-Bissau,Bissau,11.881655,-15.617794,
 Guyana,Georgetown,6.801279,-58.155125,
@@ -105,12 +105,12 @@ Indonesia,Jakarta,-6.208763,106.845599,IDN
 Iran,Tehran,35.689198,51.388974,IRN
 Iraq,Baghdad,33.312806,44.361488,IRO
 Ireland,Dublin,53.349805,-6.26031,IRL
-Isle of Man,Douglas,54.152337,-4.486123,IMN
+#Isle of Man,Douglas,54.152337,-4.486123,IMN
 Israel,Tel Aviv,32.0853,34.781768,ISR
 Italy,Rome,41.902784,12.496366,ITA
 Jamaica,Kingston,18.042327,-76.802893,JAM
 Japan,Tokyo,35.709026,139.731992,JPN
-Jersey,St. Helier,49.186823,-2.106568,JEY
+#Jersey,St. Helier,49.186823,-2.106568,JEY
 Jordan,Amman,31.956578,35.945695,JOR
 Kazakhstan,Astana,51.160523,71.470356,KAZ
 Kenya,Nairobi,-1.292066,36.821946,KEN
@@ -226,7 +226,7 @@ Timor-Leste,Dili,-8.556856,125.560314,
 Togo,Lomé,6.172497,1.231362,
 Tokelau,Nukunonu,-9.2005,-171.848,
 Tonga,Nukuʻalofa,-21.139342,-175.204947,
-Transnistria,Tiraspol,46.848185,29.596805,
+#Transnistria,Tiraspol,46.848185,29.596805,
 Trinidad and Tobago,Port of Spain,10.654901,-61.501926,
 Tristan da Cunha,Edinburgh of the Seven Seas,-37.068042,-12.311315,
 Tunisia,Tunis,36.806495,10.181532,TUN

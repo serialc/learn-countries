@@ -8,10 +8,10 @@ var LC = {
     "type": '',
     "qnum": 0,
     "csets": {
-      1: ['FRA', 'DEU', 'GBR', 'DNK', 'BEL', 'NLD', 'LUX', 'IRL', 'ESP', 'PRT'],
-      2: ['ISL', 'NOR', 'SWE', 'FIN', 'EST', 'LVA', 'LTU', 'RUS', 'BLR', 'UKR', 'POL', 'CZE'],
+      1: ['FRA', 'DEU', 'GBR', 'DNK', 'BEL', 'NLD', 'LUX', 'IRL', 'ESP', 'PRT', 'CHE', 'MCO'],
+      2: ['ISL', 'NOR', 'SWE', 'FIN', 'EST', 'LVA', 'LTU', 'RUS', 'BLR', 'UKR', 'POL', 'CZE', 'GEO'],
       3: ['SVK', 'HUN', 'SVN', 'HRV', 'SRB', 'BIH', 'ROU', 'MDA', 'BGR', 'MKD', 'AUT'],
-      4: ['AND', 'MCO', 'CHE', 'LIE', 'VAT', 'MNE', 'KOS', 'ALB', 'GRC', 'ITA', 'SMR'],
+      4: ['AND', 'LIE', 'VAT', 'MNE', 'KOS', 'ALB', 'GRC', 'ITA', 'SMR', 'TUR', 'MLT', 'ARM'],
       5: [] // populated automatically from sets 1-4
     },
     "active_set":[]
@@ -145,8 +145,15 @@ LC.f.onload = function() {
 
       let header = true;
       for(let line in text) {
+        
+        // skip header line
         if( header ) {
           header = false;
+          continue;
+        }
+
+        // skip commented out capitals
+        if( text[line][0] == '#' ) {
           continue;
         }
 
