@@ -38,11 +38,15 @@ LC.f.onload = function() {
   // setup the map
   // define projection
   //LC.settings.projectino = d3.geoEqualEarth()
-  LC.settings.projection = d3.geoAlbers()
-  //LC.settings.projection = d3.geoMercator()
+  /*LC.settings.projection = d3.geoAlbers()
     .scale(800)
-    //.translate([200,800]);
-    .rotate([-25,-15,0]);
+    //.translate([450,250])
+    .rotate([-25, -15, 0]);
+  */
+  LC.settings.projection = d3.geoMercator()
+    .center([ 13, 52 ])
+    .translate([ LC.settings.width/2, LC.settings.height/2 ])
+    .scale([ LC.settings.width/1.3 ]);
 
   // define GCS to PCS generator using projection
   LC.tools.pathGen = d3.geoPath()
@@ -185,7 +189,9 @@ LC.f.onload = function() {
 LC.f.mouse_down = function() { LC.data.mouse = performance.now(); };
 
 LC.f.mouse_up = function(code) {
-  if( (performance.now() - LC.data.mouse) < 500 ) { LC.f.country_click(code); }
+  if( (performance.now() - LC.data.mouse) < 600 ) {
+    LC.f.country_click(code);
+  }
 };
 
 LC.f.country_click = function(code) {
@@ -333,6 +339,7 @@ LC.f.reset_game = function() {
   document.getElementById('game_results').style.display = 'none';
   document.getElementById('select_next').style.display = 'none';
   document.getElementById('select_play_again').style.display = 'none';
+  document.getElementById('game_feedback').style.display = 'none';
   // message boxes
   document.getElementById('smessaging').style.display = 'none';
   document.getElementById('imessaging').style.display = 'none';
